@@ -1,33 +1,35 @@
-/* MAKE MOVIE DETAIL TEXT FULLY VISIBLE */
-.movie-details-container,
-.movie-details-container * {
-  color: #f1f1f1 !important;   /* Light white for readability */
+/* NETFLIX-STYLE MOVIE DETAILS */
+.movie-details-container {
+  padding: 20px;
+  color: #ffffff;
+  max-width: 900px;
 }
 
-/* Title */
-.movie-details-container h1,
-.movie-details-container h2 {
-  color: #ffffff !important;
+.movie-details-container h1 {
+  font-size: 32px;
   font-weight: 700;
+  color: #ffffff;
 }
 
-/* Labels (Genres:, Runtime:, etc.) */
-.movie-details-container strong {
-  color: #ffffff !important;
-}
-
-/* Metadata values */
-.movie-details-container span,
 .movie-details-container p {
-  color: #dcdcdc !important;   /* Light gray for soft contrast */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #dddddd;
 }
 
-/* Link (Visit Homepage) */
+.movie-details-container strong {
+  color: #ffffff;
+}
+
+.movie-details-container span {
+  color: #cccccc;
+}
+
 .movie-details-container a {
-  color: #4da6ff !important;
+  color: #4da6ff;
   text-decoration: underline;
 }
 
 .movie-details-container a:hover {
-  color: #82c3ff !important;
+  color: #82c3ff;
 }
