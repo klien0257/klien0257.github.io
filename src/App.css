@@ -51,22 +51,16 @@ body {
   box-shadow: 0 0 0 2px #E50914;
 }
 
-/* CATEGORY FILTERS (Netflix tag style) */
-.category-btn {
-  background: #2b2b2b;
-  color: #ffffff;
-  border: none;
-  padding: 6px 14px;
-  margin: 5px;
-  border-radius: 20px;
-  font-size: 13px;
-  transition: 0.25s;
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left !important;
 }
 
-.category-btn:hover {
-  background: #E50914;
-  transform: translateY(-2px);
-}
 
 /* MOVIE GRID WRAPPER */
 .movie-grid {
