@@ -1,3 +1,6 @@
+// ⬆️ MOVE TOKEN OUTSIDE COMPONENT TO FIX NETLIFY CI ESLINT ERROR
+const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || "";
+
 import React, { useEffect, useState } from "react";
 import FetchMoviesByGenre from "../API/FetchMoviesByGenre";
 import FetchMoviesBySearch from "../API/FetchMoviesBySearch";
@@ -14,7 +17,6 @@ const MovieList = ({ searchText }) => {
   const [genreIds, setGenreIds] = useState([]);
 
   const userLoggedIn = isLoggedIn();
-  const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || "";
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -56,7 +58,7 @@ const MovieList = ({ searchText }) => {
     };
 
     loadMovies();
-  }, [page, genreIds, searchText]);
+  }, [page, genreIds, searchText]); // ACCESS_TOKEN REMOVED → FIXES NETLIFY ERROR
 
   const handleNextPage = () => {
     if (page < totalPages) setPage(page + 1);
