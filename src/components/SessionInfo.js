@@ -1,27 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SessionInfo = ({ movieSessions, movieId }) => {
-  const handleSessionSelect = (session) => {
-    localStorage.setItem('movieSession', JSON.stringify(session));
+  const navigate = useNavigate();
+
+  const handleSessionClick = (sessionTime) => {
+    navigate(`/movie/${movieId}`, {
+      state: {
+        sessionTime,
+      },
+    });
   };
 
   return (
-    <Link to={`/movie/${movieId}`} className='container'>
-      <ul>
-        {movieSessions.map((session, index) => (
-          <li key={index}>
-            <button
-              onClick={() => handleSessionSelect(session)}
-              className='bg-red-500 w-full border rounded-lg text-left text-white text-sm font-semibold p-1 my-1 flex space-x-2'
-            >
-              <span>{session.time}</span>
-              <span className='border rounded px-1'>{session.language}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </Link>
+    <div className="flex flex-wrap gap-2 mt-2">
+      {movieSessions.map((session, idx) => (
+        <button
+          key={idx}
+          onClick={() => handleSessionClick(session.time)}
+          className="time-btn"
+        >
+          {session.time}
+        </button>
+      ))}
+    </div>
   );
 };
 
