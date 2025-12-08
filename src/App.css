@@ -1,35 +1,160 @@
-/* NETFLIX-STYLE MOVIE DETAILS */
-.movie-details-container {
-  padding: 20px;
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background-color: #141414; /* Netflix dark */
   color: #ffffff;
-  max-width: 900px;
+  overflow-x: hidden;
 }
 
-.movie-details-container h1 {
-  font-size: 32px;
-  font-weight: 700;
+/* NAVBAR */
+.navbar {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 14px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar-brand {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #E50914 !important; /* Netflix Red */
+}
+
+/* SEARCH BAR */
+.search-input {
+  width: 300px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #2b2b2b;
+  color: #fff;
+  transition: 0.25s;
+}
+
+.search-input::placeholder {
+  color: #bbbbbb;
+}
+
+.search-input:focus {
+  outline: none;
+  background: #3a3a3a;
+  box-shadow: 0 0 0 2px #E50914;
+}
+
+/* CATEGORY FILTERS (Netflix tag style) */
+.category-btn {
+  background: #2b2b2b;
   color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 13px;
+  transition: 0.25s;
 }
 
-.movie-details-container p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #dddddd;
+.category-btn:hover {
+  background: #E50914;
+  transform: translateY(-2px);
 }
 
-.movie-details-container strong {
-  color: #ffffff;
+/* MOVIE GRID WRAPPER */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 22px;
+  padding: 0 40px;
 }
 
-.movie-details-container span {
-  color: #cccccc;
+/* MOVIE CARD (Netflix hover animation) */
+.movie-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.movie-details-container a {
-  color: #4da6ff;
-  text-decoration: underline;
+.movie-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: 0.35s;
 }
 
-.movie-details-container a:hover {
-  color: #82c3ff;
+/* Hover effect like Netflix thumbnails */
+.movie-card:hover {
+  transform: scale(1.12);
+  z-index: 10;
+}
+
+.movie-card:hover img {
+  filter: brightness(0.75);
+}
+
+/* SHOWTIME BUTTONS (Netflix style red pills) */
+.time-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin: 3px;
+  border-radius: 4px;
+  background: #E50914;
+  color: white;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.time-btn:hover {
+  background: #b20710;
+  transform: translateY(-2px);
+}
+
+/* MOVIE INFO (appear on hover) */
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.movie-card:hover .movie-info {
+  opacity: 1;
+}
+
+/* LOGIN / REGISTER BUTTONS */
+.action-btn {
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: 0.25s ease;
+  border: none;
+}
+
+.action-btn.login {
+  background: #ffffff;
+  color: #141414;
+}
+
+.action-btn.register {
+  background: #E50914;
+  color: white;
+}
+
+.action-btn:hover {
+  opacity: 0.85;
 }
