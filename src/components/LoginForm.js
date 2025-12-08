@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Login from '../API/Login';
 
 function LoginForm({ onClose, onLogin }) {
@@ -9,25 +9,26 @@ function LoginForm({ onClose, onLogin }) {
   });
   const formRef = useRef(null);
 
-  const handleClickOutside = (event) => {
+  // Wrap the function so that its reference is stable
+  const handleClickOutside = useCallback((event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
       onClose();
     }
-  };
+  }, [onClose]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -36,10 +37,7 @@ function LoginForm({ onClose, onLogin }) {
       const userData = await Login(BASE_URL, formData.email, formData.password);
 
       if (userData) {
-        setFormData({
-          email: '',
-          password: '',
-        });
+        setFormData({ email: '', password: '' });
         onClose();
         onLogin(userData);
       } else {
@@ -54,10 +52,6 @@ function LoginForm({ onClose, onLogin }) {
     <div className='container mx-auto mt-5' ref={formRef}>
       <form onSubmit={handleSubmit} className='max-w-sm mx-auto'>
         <div className='mb-4'>
-          <label
-            htmlFor='email'
-            className='block text-gray-700 text-sm  mb-2'
-          ></label>
           <input
             type='email'
             id='email'
@@ -65,15 +59,12 @@ function LoginForm({ onClose, onLogin }) {
             placeholder='Email Address'
             value={formData.email}
             onChange={handleChange}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
             required
           />
         </div>
+
         <div className='mb-4'>
-          <label
-            htmlFor='password'
-            className='block text-gray-700 text-sm  mb-2'
-          ></label>
           <input
             type='password'
             id='password'
@@ -81,14 +72,15 @@ function LoginForm({ onClose, onLogin }) {
             placeholder='Password'
             value={formData.password}
             onChange={handleChange}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'
             required
           />
         </div>
+
         <div className='text-center'>
           <button
             type='submit'
-            className='bg-red-500 hover:bg-red-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+            className='bg-red-500 hover:bg-red-700 w-full text-white font-bold py-2 px-4 rounded'
           >
             Login
           </button>
