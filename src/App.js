@@ -5,6 +5,7 @@ import Footer from './layout/Footer';
 import NavBar from './layout/NavBar';
 import Home from './pages/Home';
 import MovieDetails from './pages/MovieDetails';
+import Checkout from './pages/Checkout';   // <-- ADD THIS
 import { isLoggedIn, login, logout } from './utils/Auth';
 
 function App() {
@@ -41,13 +42,18 @@ function App() {
           onLogin={handleLogin}
           onLogout={handleLogout}
         />
+
         <Routes>
           <Route
             path='/'
             element={<Home searchText={searchText} user={user} />}
           />
           <Route path='/movie/:id' element={<MovieDetails />} />
+
+          {/* ⭐ ADD CHECKOUT ROUTE HERE */}
+          <Route path='/checkout' element={<Checkout user={user} />} />
         </Routes>
+
         <Footer />
       </BrowserRouter>
     </div>
