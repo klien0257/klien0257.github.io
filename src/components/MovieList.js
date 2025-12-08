@@ -1,6 +1,4 @@
-// ⬆️ MOVE TOKEN OUTSIDE COMPONENT TO FIX NETLIFY CI ESLINT ERROR
-const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || "";
-
+// 🔼 ALL IMPORTS MUST BE AT TOP
 import React, { useEffect, useState } from "react";
 import FetchMoviesByGenre from "../API/FetchMoviesByGenre";
 import FetchMoviesBySearch from "../API/FetchMoviesBySearch";
@@ -9,6 +7,9 @@ import { isLoggedIn } from "../utils/Auth";
 import Genres from "./Genre";
 import MovieCard from "./MovieCard";
 import RecommendedMovies from "./RecommendedMovies";
+
+// 🔽 NOW we can define constants safely (after imports)
+const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN || "";
 
 const MovieList = ({ searchText }) => {
   const [movies, setMovies] = useState([]);
@@ -52,13 +53,12 @@ const MovieList = ({ searchText }) => {
 
       // 3️⃣ DEFAULT → BACKEND MOVIES
       const backendMovies = await FetchBackendMovies();
-
       setMovies(backendMovies);
       setTotalPages(1);
     };
 
     loadMovies();
-  }, [page, genreIds, searchText]); // ACCESS_TOKEN REMOVED → FIXES NETLIFY ERROR
+  }, [page, genreIds, searchText]);
 
   const handleNextPage = () => {
     if (page < totalPages) setPage(page + 1);
